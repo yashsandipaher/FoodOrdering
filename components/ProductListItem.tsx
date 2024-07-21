@@ -1,7 +1,8 @@
 import Colors from "@/constants/Colors";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import products from "@/assets/data/products";
 import { Product } from "@/types";
+import { Link } from "expo-router";
 
 const defaultImage =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png";
@@ -12,14 +13,16 @@ type ProductListItemProps = {
 
 function ProductListItem({ product }: ProductListItemProps) {
   return (
-    <View style={styles.container}>
-      <Image
-        source={{ uri: product.image || defaultImage }}
-        style={styles.image}
-      />
-      <Text style={styles.title}>{product.name}</Text>
-      <Text style={styles.price}> {product.price} </Text>
-    </View>
+    <Link href={`/menu/${product.id}`} asChild>
+      <Pressable style={styles.container}>
+        <Image
+          source={{ uri: product.image || defaultImage }}
+          style={styles.image}
+        />
+        <Text style={styles.title}>{product.name}</Text>
+        <Text style={styles.price}> ${product.price} </Text>
+      </Pressable>
+    </Link>
   );
 }
 
@@ -29,8 +32,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     padding: 10,
-    borderRadius: 20,
-    margin: 10,
+    borderRadius: 10,
+    flex: 2,
+    maxWidth: "50%",
   },
   title: {
     fontSize: 18,
@@ -42,5 +46,6 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 1,
+    resizeMode: "contain",
   },
 });
