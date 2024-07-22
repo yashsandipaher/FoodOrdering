@@ -4,7 +4,7 @@ import products from "@/assets/data/products";
 import { Product } from "@/types";
 import { Link } from "expo-router";
 
-const defaultImage =
+export const defaultPizzaImage =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png";
 
 type ProductListItemProps = {
@@ -16,7 +16,7 @@ function ProductListItem({ product }: ProductListItemProps) {
     <Link href={`/menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image
-          source={{ uri: product.image || defaultImage }}
+          source={{ uri: product.image || defaultPizzaImage }}
           style={styles.image}
         />
         <Text style={styles.title}>{product.name}</Text>
